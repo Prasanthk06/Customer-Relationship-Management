@@ -1,0 +1,4 @@
+name,mobile,emailid,address1,address2,pincode,district,state,status,subStatus,group,source,chitAmount
+John Doe,9876543210,john@example.com,123 Main St,Apt 4B,560001,Bangalore,Karnataka,New,Interested,Investor,Website,50000
+Jane Smith,8765432109,jane@example.com,456 Park Ave,Suite 101,400001,Mumbai,Maharashtra,Contacted,Following Up,Customer,Referral,25000
+Rajesh Kumar,7654321098,rajesh@example.com,789 Market Rd,,600001,Chennai,Tamil Nadu,Qualified,Hot Lead,Potential,Facebook,100000

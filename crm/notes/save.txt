@@ -1,0 +1,395 @@
+import React, { useState } from "react";
+import { Search } from "lucide-react";
+import Sidenav from "../components/Sidenav";
+
+const Addcontact = () => {
+
+  const [values,setValues] = useState({
+    customerName: '',
+    mobileNumber: '',
+    altMobileNumber: '',
+    emailId: '',
+    jobTitle: 'Prasanth',
+    address1: '',
+    address2: '',
+    pincode: '',
+    city: '',
+    district: '',
+    area: '',
+    state: '',
+    country: '',
+    landmark: '',
+    interestedProduct: '',
+    chitAmount: '',
+    source: '',
+    group: '',
+    leadBranch: 'Tamil Nadu',
+    leadAssignedTo: 'Tamil Nadu'
+  });
+
+  const [error,setError] = useState({});
+
+  const handleChange = (e) =>{
+    const{name,value} = e.target;
+    setValues({
+      ...values,
+      [name]:value
+    });
+
+    if(errors[name])
+    {
+      setError({
+        ...errors,
+        [name]:''
+      });
+    }
+  };
+
+  const validateform = () =>{
+    let errors = {};
+
+    if(!values.customerName.trim()){
+      errors.customerName = 'Customer Name is Required';
+    }
+
+    if(!values.mobileNumber.trim()){
+      errors.mobileNumber = 'Mobile Number is Required';
+    }else if(!/^\d{10}$/.test(values.mobileNumber)){
+      errors.mobileNumber = 'Enter it in valid form'
+    }
+
+    if(!values.interestedProduct || values.interestedProduct === 'Select')
+    {
+      errors.interestedProduct = 'Select Interested Product';
+    }
+
+   
+  }
+
+  const SumbitHandler = (e) =>{
+    e.preventDefault();
+
+    const validationerrors = validateform();
+
+    if(Object.keys(validationerrors).length > 0){
+      setError(validationerrors);
+
+    const ferror = Object.keys(validationerrors)[0];
+    alert(ferror);
+    return;
+  }
+    alert('Form Sumbitted');
+    console.log(values);
+  }
+
+  
+
+  return (
+    <div className=" flex-2  overflow-x-auto p-6 max-w-4xl mx-auto">
+      <h1 className="font-bold text-2xl mb-4">Customer Info</h1>
+      <hr className="border-gray-200 mb-6" />
+
+      <h2 className="text-gray-500 font-medium mb-2">Customer Details</h2>
+      <hr className="border-gray-200 mb-6" />
+
+      <div className="p-6">
+        <form onSubmit={SumbitHandler} className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-2">
+              <label htmlFor="customerName" className="block text-sm font-medium text-gray-700">
+                Customer Name:
+              </label>
+              <input
+                type="text"
+                name="customerName"
+                id="customerName"
+                value={values.customerName}
+                onChange={handleChange}
+                className="w-full p-2 border  border-l-2 border-l-[red]  rounded-[0.2rem] border-gray-300  focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              />
+              {errors.customerName && (
+                <p className="text-red-500">{errors.customerName}</p>
+              )}
+            </div>
+
+            
+
+            <div className="space-y-2">
+              <label htmlFor="mobileNumber" className="block text-sm font-medium text-gray-700">
+                Mobile Number:
+              </label>
+              <input
+                type="tel"
+                name="mobileNumber"
+                id="mobileNumber"
+                value={values.mobileNumber}
+                onChange={handleChange}
+                className="w-full p-2 border border-l-2 border-l-[red] rounded-[0.2rem] border-gray-300  focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label htmlFor="altMobileNumber" className="block text-sm font-medium text-gray-700">
+                Alternate Mobile Number:
+              </label>
+              <input
+                type="tel"
+                name="altMobileNumber"
+                id="altMobileNumber"
+                value={values.altMobileNumber}
+                onChange={handleChange}
+                className="w-full p-2 border border-l-2 border-l-[green]  rounded-[0.2rem] border-gray-300  focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label htmlFor="emailid" className="block text-sm font-medium text-gray-700">
+                Email ID:
+              </label>
+              <input
+                type="email"
+                name="emailid"
+                id="emailid"
+                value={values.emailid}
+                onChange={handleChange}
+                className="w-full p-2 border border-gray-300 border-l-2 border-l-[green]  rounded-[0.2rem] focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label htmlFor="jobTitle" className="block text-sm font-medium text-gray-700">
+                Job-Title/Occupation:
+              </label>
+              <input
+                type="text"
+                name="jobTitle"
+                id="jobTitle"
+                defaultValue="Prasanth"
+                className="w-full p-2 border border-gray-300 border-l-2 border-l-[green]  rounded-[0.2rem] focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              />
+            </div>
+          </div>
+
+        </form>
+      </div>
+
+      <h2 className="mt-4 text-gray-400">Residence Details</h2>
+      <hr className="border-gray-500 mt-5" />
+
+      <div className="p-6">
+        <form action="" className="space-y-4">
+             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                <div className="space-y-2">
+                    <label htmlFor="address" className="block text-sm font-medium text-gray-700">
+                    Address 1:
+                    </label>
+                    <input type="text"
+                    name="address"
+                    id="address"
+                    value={values.address1}
+                    onChange={handleChange}
+                    className="w-full p-2 border border-gray-300 border-l-2 border-l-[green]  rounded-[0.2rem] focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
+                    />
+                </div>
+
+                <div className="space-y-2">
+                    <label htmlFor="address" className="block text-sm font-medium text-gray-700">
+                    Address 2:
+                    </label>
+                    <input type="text"
+                    name="address"
+                    id="address"
+                    value={values.address2}
+                    onChange={handleChange}
+                    className="w-full p-2 border border-gray-300 border-l-2 border-l-[green]  rounded-[0.2rem] focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
+                    />
+                </div>
+
+                <div className="space-y-2">
+                    <label htmlFor="address" className="block text-sm font-medium text-gray-700">
+                    Pincode:
+                    </label>
+                    <input type="tel"
+                    name="address"
+                    id="address"
+                    value={values.pincode}
+                    onChange={handleChange}
+                    className="w-90px p-2 border border-gray-300 border-l-2 border-l-[green]  rounded-[0.2rem] focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
+                    />
+                    <button className="ml-6 rounded-[0.5rem] bg-green-400 text-xl text-white p-3"> <Search size={20}/> Search</button>
+                </div>
+
+                <div className="space-y-2">
+                    <label htmlFor="address" className="block text-sm font-medium text-gray-700">
+                    City/taluk:
+                    </label>
+                    <input type="text"
+                    name="address"
+                    id="address"
+                    value={values.city}
+                    onChange={handleChange}
+                    className="w-full p-2 border border-gray-300 border-l-2 border-l-[green]  rounded-[0.2rem] focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
+                    />
+                </div>
+
+                <div className="space-y-2">
+                    <label htmlFor="address" className="block text-sm font-medium text-gray-700">
+                    District:
+                    </label>
+                    <input type="text"
+                    name="address"
+                    id="address"
+                    value={values.district}
+                    onChange={handleChange}
+                    className="w-full p-2 border border-gray-300 border-l-2 border-l-[green]  rounded-[0.2rem] focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
+                    />
+                </div>
+
+                <div className="space-y-2">
+                    <label htmlFor="address" className="block text-sm font-medium text-gray-700">
+                    Area:
+                    </label>
+                    <input type="text"
+                    name="address"
+                    id="address"
+                    value={values.area}
+                    onChange={handleChange}
+                    className="w-full p-2 border border-gray-300 border-l-2 border-l-[green]  rounded-[0.2rem] focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
+                    />
+                </div>
+
+                <div className="space-y-2">
+                    <label htmlFor="address" className="block text-sm font-medium text-gray-700">
+                    State:
+                    </label>
+                    <input type="text"
+                    name="address"
+                    id="address"
+                    value={values.state}
+                    onChange={handleChange}
+                    className="w-full p-2 border border-gray-300 border-l-2 border-l-[green]  rounded-[0.2rem] focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
+                    />
+                </div>
+
+                <div className="space-y-2">
+                    <label htmlFor="address" className="block text-sm font-medium text-gray-700">
+                    Country:
+                    </label>
+                    <input type="text"
+                    name="address"
+                    id="address"
+                    value={values.country}
+                    onChange={handleChange}
+                    className="w-full p-2 border border-gray-300 border-l-2 border-l-[green]  rounded-[0.2rem] focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
+                    />
+                </div>
+
+                <div className="space-y-2">
+                    <label htmlFor="address" className="block text-sm font-medium text-gray-700">
+                    landmark:
+                    </label>
+                    <input type="text"
+                    name="address"
+                    id="address"
+                    value={values.landmark}
+                    onChange={handleChange}
+                    className="w-full p-2 border border-gray-300 border-l-2 border-l-[green]  rounded-[0.2rem] focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
+                    />
+                </div>
+             </div>
+        </form>
+      </div>
+
+      <h2 className="mt-4 text-gray-400">Product Details</h2>
+      <hr className="border-gray-500 mt-5" />
+      
+      <div className="p-6">
+        <form action="" className="space-y-4">
+             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+
+                <div className="space-y-2">
+                    <label htmlFor="Product" className="block text-sm font-medium text-gray-700">
+                    Interested Product:
+                    </label>
+                    <select className="w-full p-2 border border-gray-300 border-l-2 border-l-[red]  rounded-[0.2rem] focus:ring-2 focus:ring-blue-500 focus:border-blue-500"  name="" id="">
+                        <option value="Select">Select</option>
+                        <option value="Chit">Chit</option>
+                    </select>
+                </div>
+
+                <div className="space-y-2">
+                    <label htmlFor="address" className="block text-sm font-medium text-gray-700">
+                    Chit Amount:
+                    </label>
+                    <input type="number"
+                    name="amount"
+                    id="amount"
+                    value={values.chitAmount}
+                    onChange={handleChange}
+                    className="w-full p-2 border border-gray-300 border-l-2 border-l-[red]  rounded-[0.2rem] focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
+                    />
+                </div>
+
+                <div className="space-y-2">
+                    <label htmlFor="Product" className="block text-sm font-medium text-gray-700">
+                    Source:
+                    </label>
+                    <select value={values.source} onChange={handleChange} className="w-full p-2 border border-gray-300 border-l-2 border-l-[red]  rounded-[0.2rem] focus:ring-2 focus:ring-blue-500 focus:border-blue-500"  name="" id="">
+                        <option value="Select">Select</option>
+                        <option value="Existing Customer">Existing Customer</option>
+                        <option value="FaceBook">FaceBook</option>
+                        <option value="Landing Page">Landing Page</option>
+                        <option value="Missed Call">Missed Call</option>
+                        <option value="Walk In">Walk In</option>
+                        <option value="Web Enqiury">Web Enqiury</option>
+                    </select>
+                </div>
+
+
+                <div className="space-y-2">
+                    <label htmlFor="Product" className="block text-sm font-medium text-gray-700">
+                    Group:
+                    </label>
+                    <select value={values.group}  className="w-full p-2 border border-gray-300 border-l-2 border-l-[red]  rounded-[0.2rem] focus:ring-2 focus:ring-blue-500 focus:border-blue-500"  name="" id="">
+                        <option value="Select">Select</option>
+                        <option value="Borrower">Borrower</option>
+                        <option value="Digital">Digital</option>
+                        <option value="Investor">Investor</option>
+                        <option value="Moderate Investor">Moderate Investor</option>
+                    </select>
+                </div>
+
+                <div className="space-y-2">
+                    <label htmlFor="Product" className="block text-sm font-medium text-gray-700">
+                    Lead Assigned Branch:
+                    </label>
+                    <select className="w-full p-2 border border-gray-300 border-l-2 border-l-[green]  rounded-[0.2rem] focus:ring-2 focus:ring-blue-500 focus:border-blue-500"  name="" id="">
+                        <option value="Tamil Nadu">Tamil Nadu</option>
+                        <option value="Avadi">Avadi</option>
+                    </select>
+                </div>
+
+                <div className="space-y-2">
+                    <label htmlFor="Product" className="block text-sm font-medium text-gray-700">
+                    Lead Assigned to:
+                    </label>
+                    <select className="w-full p-2 border border-gray-300 border-l-2 border-l-[green]  rounded-[0.2rem] focus:ring-2 focus:ring-blue-500 focus:border-blue-500"  name="" id="">
+                        <option value="Tamil Nadu">Tamil Nadu</option>
+                        <option value="Avadi">Avadi</option>
+                    </select>
+                </div>
+             </div>
+        </form>
+      </div>
+
+      <div className="flex space-x-4">
+        <button className="p-2  bg-blue-500 rounded-[0.5rem]">Sumbit</button>
+        <button className="p-2  bg-gray-400 rounded-[0.5rem]">Clear</button>
+      </div>
+
+    </div>
+
+  );
+};
+
+export default Addcontact;
