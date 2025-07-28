@@ -16,6 +16,7 @@ import { Bar, Doughnut, Line } from "react-chartjs-2";
 import "../App.css";
 
 // Register ChartJS components
+//test
 ChartJS.register(
   CategoryScale,
   LinearScale,
